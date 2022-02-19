@@ -59,6 +59,7 @@ function MainChart({ projectList }) {
             ]
             returnList.push(processedProject)
         })
+        console.log(returnList);
         setProcessedList([...returnList])
     }
     useEffect(() => {
