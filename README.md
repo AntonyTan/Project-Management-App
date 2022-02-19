@@ -1,7 +1,9 @@
-A demo can be found at https://todo-awt.herokuapp.com/
+An extension of my previous Todo-App that can be found https://todo-awt.herokuapp.com/
 
-A web app that allows users to log in, add, delete, edit, and complete tasks on a personal todo list. Created for users who wish to write down tasks to complete without installing an app and want a single registration process.
+Current work in progress can be found https://project-management-awt.herokuapp.com/
+
+A web app that allows users to log in, add, delete, edit, and complete tasks on a project management web app. Displays projects via a gannt chart.
 
 Created using the PERN stack. Uses Bcrypt and JWT for authentication and authorisation.
 
-Supports PC and Mobile screens.
+Currently only supports PC screens. 
