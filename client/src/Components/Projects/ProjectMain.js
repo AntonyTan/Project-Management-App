@@ -68,7 +68,6 @@ function ProjectMain({projectList, setProjectList}) {
     }
 
     const addProject = async (project) => {
-        console.log(project)
         try {
             const response = await fetch("/projects/", {
                 method: "POST",

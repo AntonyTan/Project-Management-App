@@ -3,10 +3,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 function ProjectCreate({showCreation, addProject}) {
 
+    const today = new Date()
+    const tomorrow = new Date(today)
+    tomorrow.setDate(tomorrow.getDate() + 1)
     
-    const [name, setName] = useState('a');
-    const [description, setDescription] = useState('a');
-    const [date, setDate] = useState((new Date()).toLocaleDateString('en-CA'));
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [date, setDate] = useState((tomorrow).toLocaleDateString('en-CA'));
 
 
     const changeName = (e) => {
@@ -66,7 +69,7 @@ function ProjectCreate({showCreation, addProject}) {
             <h3>Description</h3>
             <textarea
                 type = "text" 
-                placeholder ="Displays and visualises project" 
+                placeholder ="Website should display information." 
                 value = {description} 
                 name = "description" 
                 onChange= {changeDescription}

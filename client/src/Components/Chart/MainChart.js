@@ -6,7 +6,7 @@ import { Chart } from "react-google-charts";
 function MainChart({projectList}) {
     const [trackHeight, setTrackHeight] = useState(30);
     const options = {
-        height: trackHeight * (projectList.length+1),
+        height: trackHeight * (projectList.length+1) + 10,
         gantt: {
             trackHeight: trackHeight
         },
@@ -55,7 +55,6 @@ function MainChart({projectList}) {
     })
     
     const showChart = () => {
-        console.log(projectList)
         return(
             <div id="gannt-chart">
                 <Chart
@@ -69,14 +68,10 @@ function MainChart({projectList}) {
             </div>
         )
     }
-    const showMessage = () => {
-        return(
-            <h1>Add a Project to get Started!</h1>
-        )
-    }
+
     return (
         <div className='chart-display'>
-            {processedList.length ? showChart() : showMessage()}
+            {showChart()}
         </div>
 
     )

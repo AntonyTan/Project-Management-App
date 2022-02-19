@@ -239,6 +239,7 @@ th.col4{
 }
 .tableFixHead table{
   border-collapse: collapse;
+  width: 100%;
 }
 .tableFixHead thead th{
   position: sticky;
@@ -288,7 +289,9 @@ th.col4{
   margin-top: 10px;
   right: 25px;
   margin-right: 25px;
-
+}
+.button:hover{
+  cursor: pointer;
 }
 
 /* width */
