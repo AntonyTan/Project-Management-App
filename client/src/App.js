@@ -1,22 +1,24 @@
 import React, {Fragment, useState, useEffect} from "react";
+
 import "./App.css"
 
-import Dashboard from "./Components/Dashboard";
-import Login from "./Components/Login";
-import Register from "./Components/Register";
-
+import Mainpage from "./Components/Mainpage";
+import Login from "./Components/Auth/Login";
+import Register from "./Components/Auth/Register";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate
+} from "react-router-dom";
 
 
 function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
   const setAuth = (bool) => {
     setIsAuthenticated(bool);
   };
-  const setReg = (bool) => {
-    setShowRegister(bool);
-  }
 
   const isAuth = async() => {
     try {
@@ -29,7 +31,7 @@ function App() {
       })
       const result = await response.json();
 
-      (result===true ? setIsAuthenticated(true) : setIsAuthenticated(false));
+      setIsAuthenticated(result);
     } catch (error) {
         console.error(error.message);
     }
@@ -40,16 +42,20 @@ function App() {
   }, [])
 
   return (
+    <BrowserRouter>
+      <Routes>
+        
+        <Route path="/" element={ 
+          isAuthenticated ? <Navigate to ='/dashboard'/> : <Navigate to='/login'/>} />
+        <Route path="/login" element={
+          isAuthenticated ? <Navigate to ='/dashboard'/> : <Login setAuth = {setAuth}/>} />
+        <Route path="/register" element={ 
+        isAuthenticated ? <Navigate to ='/dashboard'/> : <Register setAuth = {setAuth}/>} />
+        <Route path="/dashboard" element={
+          isAuthenticated ? <Mainpage setAuth = {setAuth}/> : <Navigate to='/login'/>} />
 
-    <div className = {!isAuthenticated ? 'auth-page' : 'dashboard'}>
-      <meta content="width=device-width, initial-scale=1" name="viewport" />
-      {!isAuthenticated ? 
-      (!showRegister)? (<Login setAuth = {setAuth} setReg = {setReg}/>) : (<Register setAuth = {setAuth} setReg = {setReg}/>)
-      :
-      <Dashboard className = 'dashboard'setAuth = {setAuth} />
-    }
-
-    </div>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

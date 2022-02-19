@@ -1,49 +1,49 @@
-import React, {Fragment, useState} from 'react'
+import React, {useState} from 'react'
+import {
+    Link
+  } from "react-router-dom";
+function Register({setAuth}) {
 
-function Login({setAuth, setReg}) {
     const [inputs, setInputs] = useState({
         username: "",
         password: ""
     })
     const {username, password} = inputs;
 
+
     const handleOnChange = (e) => {
         setInputs({...inputs, 
             [e.target.name] : e.target.value
         })
     }
-    const handleRegister = (e) => {
-        setReg(true);
-    }
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const body = {
-                user_name: username,
+                user_name: username, 
                 user_password: password
-            }
-            const response = await fetch("/auth/login", {
-                method: "POST",
+            };
+            const response = await fetch("/auth/register",{
+                method: "POST", 
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(body)
-            })
+                body: JSON.stringify(body)}
+            )
             if (response.status === 401){
-                console.log("Invalid login credentials");
+                console.log("User already exists");
                 return;
             }
-
-            const jwtToken = await response.json()
+            const jwtToken = await response.json();
             localStorage.setItem("token", jwtToken.token);
             setAuth(true);
         } catch (error) {
-            
+            console.error(error.message)
         }
     }
-
     return (
-        <Fragment>
-            <div className = 'auth-body'>   
-                <h1>Login</h1>
+        <div className = 'auth-page'>
+                <div className = "auth-title">
+                    <h1>Register</h1>
+                </div>
                 <form className = "auth-form" onSubmit = {handleSubmit}>
                         <input 
                             type = "text" 
@@ -69,12 +69,12 @@ function Login({setAuth, setReg}) {
                     Login
                 </button>
                 </form>
-                <p onClick = {handleRegister} className = 'toggleAuth'>
-                    I don't have an account
+                <p className = 'toggleAuth'>
+                    
+                    <Link to="/login">I already have an account</Link>
                 </p>
-            </div>
-        </Fragment>
+        </div>
     )
 }
 
-export default Login
+export default Register

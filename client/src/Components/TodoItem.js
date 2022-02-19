@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
-import { RiCloseCircleLine } from 'react-icons/ri';
-import {TiTickOutline} from 'react-icons/ti';
-import { AiFillEdit } from 'react-icons/ai'
+import Collapsible from "./Collapsible"
 
-function TodoItem({todoList, completeTodo, removeTodo, toggleEditMode, updateTodo}) {
+
+function TodoItem({todoList, completeTodo, removeTodo, toggleEditMode, updateTodo, toggleOpen}) {
     const [newValue, setNewValue] = useState("");
 
     const handleSubmit = (e, todo) => {
@@ -18,80 +17,68 @@ function TodoItem({todoList, completeTodo, removeTodo, toggleEditMode, updateTod
     const handleChange = (e) => {
         setNewValue(e.target.value);
     }
+    const showEditInput = (todo) => {
+        return (
+            <form onSubmit = {(e) =>{handleSubmit(e, todo);}}>
+                <input
+                    type = "text"
+                    placeholder = "Edit your todo"
+                    name = "todo input edit"
+                    className = "todo-input-edit"
+                    value = {newValue}
+                    onChange = {handleChange}>
+                </input>
+            </form>
+        )
+    }
+
+    const showTodo = (todo) => {
+        return (
+            <div className = 'todo-full'>
+                <Collapsible 
+                    label = {todo.description} 
+                    removeTodo = {removeTodo} 
+                    todo = {todo} 
+                    toggleOpen = {toggleOpen}>
+                </Collapsible>
+            </div>
+
+        )
+
+    }
 
     return(
         <div className ='todo-list'>
-            {todoList.map((todo,index) => (
-                <div key = {index} className = {todo.iscomplete === true ? 'todo-row complete' : 'todo-row'}>
-                    <div>{
-                    todo.isEdit? 
-                    <form onSubmit = {(e) =>{handleSubmit(e, todo);}}>
-                        <input
-                            type = "text"
-                            placeholder = "Edit your todo"
-                            name = "todo input edit"
-                            className = "todo-input-edit"
-                            value = {newValue}
-                            onChange = {handleChange}
-                        >
-                        </input>
-                    </form>
-                    : todo.description}
+            {todoList.map( (todo,index) => (
+                <div 
+                    key = {index} 
+                //     // onClick = {() => completeTodo(todo)}
+                //     // onDoubleClick = {() => toggleEditMode(todo.todo_id)}
+                //     // className = {todo.iscomplete === true? 'todo-row complete' : 'todo-row'}>
+                    >
+                    {todo.isEdit? showEditInput(todo): showTodo(todo)}
+
+                     {/* <button className = 'todo-delete-button' onClick = {() => removeTodo(todo.todo_id)}>
+                //     X
+                //     </button> */}
+
                 </div>
-                <div className="icons">
-                    <RiCloseCircleLine
-                    onClick = {() => removeTodo(todo.todo_id)}
-                    className='delete-icon'
-                    />
-                    <AiFillEdit
-                    onClick = {() => toggleEditMode(todo.todo_id)}
-                    className = 'edit-icon'
-                    />
-                    <TiTickOutline
-                    onClick = {() => completeTodo(todo)}
-                    className = 'complete-icon'
-                    />
-                </div>
-            </div>
+                
+                // <div className="icons">
+                //     <RiCloseCircleLine
+                //         onClick = {() => removeTodo(todo.todo_id)}
+                //         className='delete-icon'/>
+                //     <AiFillEdit
+                //         onClick = {() => toggleEditMode(todo.todo_id)}
+                //         className = 'edit-icon'/>
+                // </div>
             ))}
+
 
         </div>
 
     )
-    // return todoList.map((todo,index) => (
-    //         <div key = {index} className = {todo.iscomplete === true ? 'todo-row complete' : 'todo-row'}>
-    //             <div>
-    //                 {todo.isEdit? 
-    //                 <form onSubmit = {(e) =>{handleSubmit(e, todo);}}>
-    //                     <input
-    //                         type = "text"
-    //                         placeholder = "Edit your todo"
-    //                         name = "todo input edit"
-    //                         className = "todo-input-edit"
-    //                         value = {newValue}
-    //                         onChange = {handleChange}
-    //                     >
-    //                     </input>
-    //                 </form>
-    //                 : todo.description}
-    //             </div>
-    //             <div className="icons">
-    //                 <RiCloseCircleLine
-    //                 onClick = {() => removeTodo(todo.todo_id)}
-    //                 className='delete-icon'
-    //                 />
-    //                 <AiFillEdit
-    //                 onClick = {() => toggleEditMode(todo.todo_id)}
-    //                 className = 'edit-icon'
-    //                 />
-    //                 <TiTickOutline
-    //                 onClick = {() => completeTodo(todo)}
-    //                 className = 'complete-icon'
-    //                 />
-    //             </div>
-    //         </div>
-    //     )
-    // )
+
 
 } 
 

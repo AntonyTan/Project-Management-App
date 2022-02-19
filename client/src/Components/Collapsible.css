@@ -1,0 +1,10 @@
+.collapsible .content{
+    border: 3px solid rgba(59, 56, 56, 0.1);
+    height: 0px;
+    overflow: hidden;
+    transition: height ease 0.3s;
+}
+
+.collapsible .content.show{
+    height: 200px;
+}

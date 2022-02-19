@@ -1,164 +1,450 @@
-* {
-  font-family: 'Trebuchet MS';
-  font-size: 16px;
-}
-
 body{
   background: linear-gradient(
-    0deg,
+    -90deg,
     rgb(49, 104, 212) 0%,
     rgb(77, 221, 178) 100%
   ) fixed;
+  margin: 0;
 }
-
-.dashboard{
-  background: white;
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform: translate(-50%, -50%);
-  height: 640px;
-}
-h1 {
-  font-size: 32px;
-  text-align: center;
-}
-.todo-form{
-  margin-bottom: 32px;
-  display: flex;
-}
-
-.todo-form-input{
-  display: flex;
-  width: 340px;
-  padding: 16px;
-  margin-left: 30px;
-}
-.todo-button{
-  margin-right: 30px;
-  width: 100px;
-}
-
-.todo-list{
-  height: 440px;
-  overflow:scroll;
-}
-
-.todo-row{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 8px auto;
-  background: rgba(95, 89, 89, 0.1);
-  padding: 16px;
-  margin-left: 30px;
-  margin-right: 30px;
-}
-
-.todo-input-edit{
-  padding: 16px;
-  width: 340px;
-}
-
-.complete{
-  text-decoration: line-through;  
-}
-
-.icons{
-  display: flex;
-  cursor: pointer;
-  font-size: 20px;
-}
-.delete-icon{
-  margin-right: 8px;
-  color: red;
-}
-.edit-icon{
-  margin-right: 8px;
-  color: rgb(125, 125, 245);
-
-}
-.complete-icon{
-  color: green;
-}
-
-.auth-body{
+.auth-page{
   background: white;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
+  min-width: 300px;
+  min-height: 400px;
 }
-
+.auth-title{
+  text-align: center;
+}
 .auth-form{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 200px;
+  justify-content: start;
+  height: 250px;
+  margin: 16px;
 }
 .auth-input{
   padding: 16px;
-  width: 80%;
+  margin-bottom: 16px;
 }
-
 .auth-button{
   padding: 16px;
-  width: 30%;
 }
 .toggleAuth{
+  text-align: center;
   color: orange;
   text-decoration: underline;
+}
+
+.main-page{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.project-bar{
+  background: white;
+  position: relative;
+  width: 200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  box-shadow: 0px 1px 5px rgb(224, 211, 211);
+}
+.project-bar img{
+  width: 100px;
+  margin-right:  auto;
+  margin-left:  auto;
+}
+
+
+.main-page-background-container{
+  width: 100%;
+}
+
+.main-page-banner{
+  width: 100%;
+  height: 200px;
+  z-index: -2;
+}
+
+.main-page-background{
+  position: fixed;
+  background: #f8f5faf6;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  margin: auto;
+
+}
+
+.project-display{
+  position: fixed;
+  background: white;
+  z-index: 1;
+  border-radius: 5px;
+  top: 150px;
+  left: 250px;
+  height: 400px;
+  width: 1600px;
+  box-shadow: 0px 1px 5px rgb(204, 201, 201);
+}
+
+.project-header{
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+.project-header-name{
+  margin-left: 40px;
+}
+
+.project-add-button{
+  border-radius: 5px;
+  height: 35px;
+  margin-top: auto;
+  margin-bottom: auto;
+  right: 25px;
+  margin-right: 25px;
+}
+
+.project-list table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: scroll; 
+}
+.project-list th{
+  background-color: rgb(235, 235, 235);
+  height: 40px;
+  text-align: left;
+  padding-left: 15px;
+}
+
+
+
+
+
+th.col1{
+  text-align: left;
+  width: 25%;
+}
+th.col2{
+  text-align: left;
+  width: 60%;
+}
+th.col3{
+  text-align: left;
+  width: 10%;
+}
+th.col4{
+  text-align: left;
+  width: 5%;
+}
+.project-list tr{
+  height: 50px;
+  border-top: 2px solid rgb(236, 231, 231);
+}
+
+.project-list tr:last-child{
+  border-bottom: 2px solid rgb(236, 231, 231);
+}
+.project-list td{
+  height: 60px;
+  padding-left: 15px;
+}
+
+.nav-button{
+  height: 30px;
+  width: 30px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(194, 193, 193);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.page-buttons{
+  display:flex;
+  column-gap: 5px;
+  margin-top: 15px;
+  margin-left: 15px;
+  position: absolute;
+  bottom: 15px;
+}
+
+.page-number {
+  height: 40px;
+  width: 40px;
+  background-color: rgba(54, 97, 214, 0.692);
+  border-radius: 50%;
+  display: inline-block;
+}
+.page-number p{
+  text-align: center;
+  margin-top: 6px;
+  margin-left: -1px;
+  font-size: 18px;
+  color: white;
+}
+.nav-button{
+  margin-top: 5px;
   text-align: center;
 }
-#logout{
-  text-align: right;
-  margin-right: 10px;
+.nav-button:hover{
+  background-color: rgb(236, 236, 236);
+  cursor: pointer;
 }
-/* mobile screens */
-@media only screen and (max-width: 550px){
-  *{
-    font-size: 12px;
-  }
-  .auth-form{
-    justify-content: space-evenly;
-  }
-  .auth-body{
-    width: 80%;
-    height: 80%;
-    height: 400px;
-    min-width: 250px;
-  }
-  .auth-input{
-    padding-left: 12px;
-    padding-right: 12px;
-    margin-bottom: 24px;
-  }
+.arrow{
+  color: gray;
+  margin-top: 4px;
+}
 
-  .toggleAuth{
-    position: absolute;
-    bottom: 0%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .dashboard{
-    position: absolute;
-    width: 90%;
-    top: 50%;
-  }
-  .todo-form{
-    margin-bottom: 10px;
-  }
-  .todo-form-input{
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 0px;
-  }
-  .todo-button{
-    width: 50px;
-  }
-  .todo-row{
-    padding: 10px;
-  }
+.darken-screen{
+  background: black;
+  opacity: 70%;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  position: fixed;
+  z-index: 2;
 }
+.darken-screen.ticket-screen{
+  top: 0px;
+}
+.project-page{
+  background: white;
+  height: 700px;
+  width: 1200px;
+  position: fixed;
+  z-index: 2;
+  left: 200px;
+  top: -50px;
+  box-shadow: 0px 1px 5px rgb(136, 136, 136);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  position: absolute
+}
+
+.tableFixHead{
+  background: white;
+  z-index: 3; 
+  overflow-y: auto; 
+  height: 100%;
+  width: 650px;
+  border-radius: 5px;
+}
+.tableFixHead table{
+  border-collapse: collapse;
+}
+.tableFixHead thead th{
+  position: sticky;
+  top: 0px;
+  background-color: rgb(240, 240, 240);
+  height: 50px;
+  padding-left: 15px;
+}
+.tableFixHead tr{
+  height: 50px;
+}
+.tableFixHead tbody tr:hover{
+  background: rgb(243, 243, 243);
+  cursor: pointer;
+}
+
+
+
+.tableFixHead td{
+  border-bottom: 2px solid rgb(236, 231, 231);
+  height: 60px;
+  padding-left: 15px;
+}
+
+.project-info-list{
+  height: 100%;
+  width: 50%;
+}
+.project-info-list h1{
+  padding-left: 15px;
+}
+.ticket-create{
+  padding-left: 15px;
+}
+.ticket-create input{
+  width: 500px;
+  height: 32px;
+}
+.ticket-create textarea{
+  width: 500px;
+  height: 100px;
+  resize: none;
+}
+.ticket-create button{
+  border-radius: 5px;
+  height: 35px;
+  margin-top: 10px;
+  right: 25px;
+  margin-right: 25px;
+
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+.project-create-screen{
+  background: white;
+  box-shadow: 0px 1px 5px rgb(136, 136, 136);
+  border-radius: 5px;
+  height: 600px;
+  left: 750px;
+  top: 10%;
+  position: fixed; 
+  width: 400px;
+  z-index: 3;
+  padding: 16px;
+}
+.project-create-screen form{
+  display: flex;
+  flex-direction: column;
+}
+.project-create-screen h2{
+  font-size: 24px;
+  text-align: center;
+}
+.project-create-screen h3{
+  font-size: 20px;
+}
+.project-create-screen button{
+  height: 32px;
+  width: 128px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 75px;
+  
+}
+.project-input{
+  height: 32px;
+  width: 98%;
+}
+
+.project-textarea{
+  height: 128px;
+  resize: none;
+  width: 98%;
+}
+.project-dateinput{
+  margin-top: -10px;
+  width: 35%;
+}
+
+.main-page-banner h1{
+  color: white;
+  margin-left: 70px;
+  font-size: 50px;
+  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.chart-display{
+  position: fixed;
+  background: white;
+  z-index: 0;
+  border-radius: 5px;
+  top: 600px;
+  left: 250px;
+  width: 1600px;
+  box-shadow: 0px 1px 5px rgb(204, 201, 201);
+  display: flex;
+}
+
+#gannt-chart{
+  height: 100%;
+  width: 100%;
+}
+
+
+.top-links{
+  text-align: center;
+  color: orange;
+  text-decoration: underline;
+}
+.title{
+  text-align: center;
+}
+
+.todo-form{
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+}
+.todo-submit{
+  padding-bottom: 16px;
+}
+.todo-form-input{
+  padding: 16px;
+  width: 100%;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+.todo-form-button{
+  top: 100%;
+  width: 64px;
+}
+
+.todo-list{
+  height: 300px;
+  overflow: scroll;
+}
+.todo-title{
+  background: rgba(95, 89, 89, 0.1);
+  font-size: 12px;
+  width: 100%;
+  text-align: left;
+  height: 48px;
+  padding-left: 16px;
+  padding-top: 6px;
+  border: 1px rgba(0, 0, 0, 1);
+  cursor: pointer;
+}
+.todo-title:active{
+  background:rgba(0, 0, 0, 0.1)
+}
+.todo-title p{
+  padding-left: 16px;
+}
+.todo-full{
+  margin-top: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 85%;
+}
+
+.complete{
+  opacity: 50%;
+}
+#todo-body{
+  background: rgba(240, 230, 230, 0.1);
+  border: solid;
+  border-color: rgba(95, 89, 89, 0.1);
+}
+

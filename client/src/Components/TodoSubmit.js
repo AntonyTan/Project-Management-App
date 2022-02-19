@@ -14,7 +14,9 @@ function TodoSubmit({addTodo}) {
         }
         addTodo({
             description: input,
-            iscomplete: false
+            iscomplete: false,
+            isedit: false,
+            isopen: false
         });
         setInput('');
     }
@@ -30,9 +32,8 @@ function TodoSubmit({addTodo}) {
                 onChange={handleChange}
                 >
             </input>
-            <button 
-                className='todo-button'>
-                Add todo
+            <button className = 'todo-form-button'>
+                +
             </button>
 
         </form>

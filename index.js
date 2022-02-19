@@ -24,9 +24,13 @@ app.use("/auth", require('./server/routes/jwtAuth'))
 
 app.use("/dashboard", require('./server/routes/dashboard'));
 
-//todo routes
+//project routes
 
-app.use("/todo", require('./server/routes/todo'));
+app.use("/projects", require('./server/routes/projects'));
+
+//ticket routes
+
+app.use("/tickets", require('./server/routes/tickets'));
 
 
 app.get("*", (req, res) => {

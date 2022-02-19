@@ -1,12 +1,17 @@
-import React, {Fragment, useState, useEffect} from 'react'
-import TodoSubmit from './TodoSubmit'
-import TodoItem from './TodoItem';
+import React, {useState, useEffect, Fragment} from 'react'
+import ProjectMain from './Projects/ProjectMain.js';
+import MainChart from './Chart/MainChart.js'
 
-function Dashboard({setAuth}) {
+function Mainpage({setAuth}) {
     const [name, setName] = useState("");
-    const [todoList, setTodoList] = useState([]);
+    const [projectList, setProjectList] = useState([]);
     const [completeUpdate, setCompleteUpdate] = useState(false); //Only purpose is to render screen again when the user clicks on complete
-    
+    const logOut = (e) => {
+        e.preventDefault();
+        localStorage.removeItem("token");
+        setAuth(false);
+    }
+
     //proxy gets ignored in deployment, uses heroku domain instead
     const getDetails = async() => {
         try {
@@ -21,12 +26,6 @@ function Dashboard({setAuth}) {
         }
     }
 
-    const logOut = (e) => {
-        e.preventDefault();
-        localStorage.removeItem("token");
-        setAuth(false);
-    }
-
     const getTodos = async() => {
         try {
             const response = await fetch("/todo/", {
@@ -34,13 +33,13 @@ function Dashboard({setAuth}) {
                 headers: {token: localStorage.token}
             });
             const json = await response.json();
-            setTodoList(json.reverse());
+            setProjectList(json.reverse());
         } catch (error) {
             console.error(error.message);
         }
     }
 
-    // Adds a new Todo into database, and calls GetTodo() to update local ToDoList
+    // Adds a new Todo into database, and calls GetTodo() to update local ProjectList
     const addTodo = async (todo) => {
         try {
             const response = await fetch("/todo/", {
@@ -51,7 +50,7 @@ function Dashboard({setAuth}) {
                 },
                 body: JSON.stringify(todo)
             });
-            getTodos();
+            // getTodos();
         } catch (error) {
             console.error(error.message);
         }
@@ -62,8 +61,8 @@ function Dashboard({setAuth}) {
                 method: "DELETE",
                 headers: {token: localStorage.token}
             });
-            const removeArr = todoList.filter(todo => todo.todo_id !== id)
-            setTodoList(removeArr);
+            const removeArr = projectList.filter(todo => todo.todo_id !== id)
+            setProjectList(removeArr);
         } catch (error) {
             console.error(error.message);
         }
@@ -84,7 +83,7 @@ function Dashboard({setAuth}) {
                     }
                 )
             })
-            todoList.map(todo => {
+            projectList.forEach(todo => {
                 if (todo.todo_id === todoToUpdate.todo_id){
                     todo.iscomplete = !todo.iscomplete;
                     setCompleteUpdate(!completeUpdate);
@@ -95,7 +94,7 @@ function Dashboard({setAuth}) {
         }
     }
     const toggleEditMode = (id) => {
-        todoList.map(todo => {
+        projectList.forEach(todo => {
             if (todo.todo_id === id){
                 if (todo.isEdit === null){
                     todo.isEdit = true;
@@ -122,7 +121,7 @@ function Dashboard({setAuth}) {
                     }
                 )
             })
-            todoList.map(todo => {
+            projectList.forEach(todo => {
                 if (todo.todo_id === updatedTodo.todo_id){
                     todo.description = updatedTodo.description;
                     todo.isEdit = !todo.isEdit;
@@ -135,24 +134,53 @@ function Dashboard({setAuth}) {
     }
     useEffect(() => {
         getDetails()
-        getTodos();
     }, []);
 
     return (
         <Fragment>
-        <p onClick = {logOut} id = "logout" className = "toggleAuth">Log Out</p>
-            <h1>Hello, {name}.</h1>
-            <TodoSubmit addTodo = {addTodo}/>
-            <TodoItem 
-            todoList = {todoList}
-            removeTodo = {removeTodo}
-            completeTodo={completeTodo}
-            toggleEditMode={toggleEditMode}
-            updateTodo = {updateTodo}
-            />
-            
+            <div className = 'main-page'>
+                <div className = 'project-bar'>
+                    <p>Project Manager</p>
+                    <img src = "https://cdn-icons-png.flaticon.com/512/1705/1705213.png"></img>
+                    
+                    <div className = 'nav-links'>
+                        {/* <p>Dashboard</p>
+                        <p>Settings</p> */}
+                    </div>
+                    <p onClick = {logOut} id = "logout" className = "toggleAuth">Log Out</p>
+                </div>
+
+                <div className = 'main-page-background-container'>
+                    <ProjectMain projectList = {projectList} setProjectList = {setProjectList}/>
+                    <div className = 'main-page-banner'>
+                        <h1>Hello, {name}.</h1>
+                    </div>
+
+                    <div className = 'main-page-background'>
+                        {/* Main Page Background */}
+                    </div>
+
+                    <MainChart projectList = {projectList}>
+
+                    </MainChart>
+
+                </div>
+                
+                
+                {/* <div className = 'dashboard'>
+                    <h1>Hello, {name}.</h1>
+
+                    <TodoSubmit addTodo = {addTodo}/>
+                    <TodoItem 
+                        projectList = {projectList}
+                        removeTodo = {removeTodo}
+                        completeTodo={completeTodo}
+                        toggleEditMode={toggleEditMode}
+                        updateTodo = {updateTodo}/>
+                </div> */}
+            </div>
         </Fragment>
     )
 }
 
-export default Dashboard
+export default Mainpage
