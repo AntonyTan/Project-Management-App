@@ -66,7 +66,7 @@ function Register({setAuth}) {
                             required
                         />
                 <button className = 'auth-button'>
-                    Login
+                    Register
                 </button>
                 </form>
                 <p className = 'toggleAuth'>
